@@ -1,5 +1,19 @@
 <?php
 
+/**
+*	
+* .___   ________ 
+* |   | /  _____/ 
+* |   |/   \  ___ 
+* |   |\    \_\  \
+* |___| \______  /
+*              \/ 
+*
+* All rights reserved InspectorGadget (c) 2018
+*
+*
+**/
+
 namespace InspectorGadget\NetworkBan;
 
 use InspectorGadget\NetworkBan\MainHandler;
