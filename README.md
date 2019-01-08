@@ -1,5 +1,5 @@
 # NetBan
 Add this plugin in all your servers!
 
-#Status
+##Status
 - Can be deployed!
