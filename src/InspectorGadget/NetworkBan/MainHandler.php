@@ -90,7 +90,7 @@ class MainHandler extends PluginBase implements Listener {
 				$connection = mysqli_connect($host, $username, $password, $database);
 				if (!$connection) {
 					$this->getLogger()->warning("Unable to connect to MySQL");
-					$this->onDisable(); // Shut down plugin
+					$this->getServer()->getPluginManager()->disablePlugin($this); // Shut down plugin
 					exit();
 				} else {
 					$this->mysqli = $connection;
