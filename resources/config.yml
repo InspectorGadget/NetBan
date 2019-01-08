@@ -11,9 +11,9 @@ kick-message: You have been NetBanned by %bannedby%!
 provider: MySQL
 
 ## MySQL Credentials
-host: "localhost"
-username: "root"
+host: ""
+username: ""
 password: ""
-database: "nban"
+database: ""
 
 ...
