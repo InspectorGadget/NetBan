@@ -9,5 +9,9 @@ commands:
     permission: nban.command
 
 permissions:
-  nban.command:
+  nban:
     default: op
+    description: "NetBan root permission"
+    children:
+      nban.command:
+        description: "Allow you to use NetBan"

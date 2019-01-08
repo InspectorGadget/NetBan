@@ -90,6 +90,7 @@ class MainHandler extends PluginBase implements Listener {
 				$connection = mysqli_connect($host, $username, $password, $database);
 				if (!$connection) {
 					$this->getLogger()->warning("Unable to connect to MySQL");
+					$this->onDisable(); // Shut down plugin
 					exit();
 				} else {
 					$this->mysqli = $connection;
@@ -110,11 +111,7 @@ class MainHandler extends PluginBase implements Listener {
 
 							case "help":
 
-								$sender->sendMessage(TF::GREEN . 
-								"
-									Commands:
-									- /nban ban {player} | Player must be online!
-								");
+								$sender->sendMessage(TF::GREEN . "Commands: \n - /nban ban {player} | Player must be online! \n - /nban pardon {player} | Unbans a player!");
 
 								return true;
 							break;
@@ -178,7 +175,9 @@ class MainHandler extends PluginBase implements Listener {
 	}
 
 	public function onDisable(): void {
-		$this->mysqli->close();
+		if (isset($this->mysqli)) {
+			$this->mysqli->close();
+		}
 		$this->getLogger()->info("Properly shutting down NetBan!");
 	}
 
