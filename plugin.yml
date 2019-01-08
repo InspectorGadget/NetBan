@@ -1,0 +1,13 @@
+name: NetBan
+version: 1.0.0
+main: InspectorGadget\NetworkBan\MainHandler
+api: 3.0.0
+author: InspectorGadget
+
+commands:
+  nban:
+    permission: nban.command
+
+permissions:
+  nban.command:
+    default: op

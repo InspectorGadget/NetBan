@@ -1,0 +1,19 @@
+---
+
+enable: true
+
+#
+# %bannedby% is a value from the Database. Example: You have been NetBanned by InspectorGadget!
+#
+kick-message: You have been NetBanned by %bannedby%!
+
+## Provider: MySQL
+provider: MySQL
+
+## MySQL Credentials
+host: "localhost"
+username: "root"
+password: ""
+database: "nban"
+
+...
