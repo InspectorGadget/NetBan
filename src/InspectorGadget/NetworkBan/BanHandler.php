@@ -84,18 +84,19 @@ class BanHandler {
 		$username = strtolower($player->getName());
 		$ip = $player->getAddress();
 		$cid = $player->getClientId();
+		$skin = $player->getSkin()->getSkinData();
 		$bannedBy = $sender->getName();
 
 		if (!$this->isExempted($username)) {
 
-			$sql = "INSERT INTO $this->banTable(username, ip, cid, bannedBy) VALUES (?, ?, ?, ?)";
+			$sql = "INSERT INTO $this->banTable(username, skin, ip, cid, bannedBy) VALUES (?, ?, ?, ?, ?)";
 			$stmt = mysqli_stmt_init($this->database);
 
 			if (!mysqli_stmt_prepare($stmt, $sql)) {
 				$sender->sendMessage("MySQL Error : Ban Player");
 				return true;
 			} else {
-				mysqli_stmt_bind_param($stmt, "ssss", $username, $ip, $cid, $bannedBy);
+				mysqli_stmt_bind_param($stmt, "sssss", $username, $skin, $ip, $cid, $bannedBy);
 				$result = mysqli_stmt_execute($stmt);
 
 				if ($result) {

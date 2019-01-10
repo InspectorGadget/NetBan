@@ -50,7 +50,7 @@ class MainHandler extends PluginBase implements Listener {
 			$this->connectMySQL();
 			$this->getServer()->getPluginManager()->registerEvents($this, $this);
 
-			$this->mysqli->query("CREATE TABLE IF NOT EXISTS `banned`(`id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, `username` TEXT NOT NULL, `ip` TEXT NOT NULL, `cid` TEXT NOT NULL, `bannedBy` TEXT NOT NULL)");
+			$this->mysqli->query("CREATE TABLE IF NOT EXISTS `banned`(`id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, `username` TEXT NOT NULL, `skin` TEXT NOT NULL, `ip` TEXT NOT NULL, `cid` TEXT NOT NULL, `bannedBy` TEXT NOT NULL)");
 			$this->mysqli->query("CREATE TABLE IF NOT EXISTS `exempt` (`id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, `username` TEXT NOT NULL)");
 
 			$this->getLogger()->info("Everything is setup!");
@@ -166,10 +166,11 @@ class MainHandler extends PluginBase implements Listener {
 		$username = strtolower($player->getName());
 		$ip = $player->getAddress();
 		$cid = $player->getClientId();
+		$skin = $player->getSkin()->getSkinData();
 		$data = $this->returnBanHandler()->getBannedData($username);
 
 		$bannedBy = $data['bannedBy'];
-		if ($ip === $data['ip'] || $cid === $data['cid'] || $username === $data['username']) {
+		if ($ip === $data['ip'] || $cid === $data['cid'] || $username === $data['username'] || $skin === $data['skin']) {
 			$player->kick(str_replace("%bannedby%", $bannedBy, $this->returnKickMessage()));
 		}
 	}
