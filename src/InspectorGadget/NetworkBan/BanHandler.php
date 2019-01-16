@@ -63,7 +63,7 @@ class BanHandler {
 		$stmt = mysqli_stmt_init($this->database);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			$plugin->getLogger()->info("MySQL Error : Is Banned Check");
+			$this->plugin->getLogger()->info("MySQL Error : Is Banned Check");
 			return true; // Cut Off
 		} else {
 			mysqli_stmt_bind_param($stmt, "s", $playerName);
