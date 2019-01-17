@@ -23,7 +23,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as TF;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\event\Listener;
 
 use InspectorGadget\NetworkBan\BanHandler;
@@ -161,7 +161,7 @@ class MainHandler extends PluginBase implements Listener {
 		}
 	}
 
-	public function onJoin(PlayerJoinEvent $event) {
+	public function onJoin(PlayerPreLoginEvent $event) {
 		$player = $event->getPlayer();
 		$username = strtolower($player->getName());
 		$ip = $player->getAddress();
@@ -172,6 +172,7 @@ class MainHandler extends PluginBase implements Listener {
 		$bannedBy = $data['bannedBy'];
 		if ($ip === $data['ip'] || $cid === $data['cid'] || $username === $data['username'] || $skin === $data['skin']) {
 			$player->kick(str_replace("%bannedby%", $bannedBy, $this->returnKickMessage()));
+			$event->setCancelled();
 		}
 	}
 
