@@ -32,7 +32,7 @@ class MainHandler extends PluginBase implements Listener {
 
 	public $mysqli;
 	public $kick_msg;
-	public $api = "http://api.rtgnetwork.tk/mcpe/netban/";
+	public $api = "http://api.rtgnetworks.com/mcpe/netban/";
 
 	public function onEnable(): void {
 
@@ -55,7 +55,7 @@ class MainHandler extends PluginBase implements Listener {
 			$this->mysqli->query("CREATE TABLE IF NOT EXISTS `exempt` (`id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, `username` TEXT NOT NULL)");
 
 			$this->getLogger()->info("Everything is setup!");
-			// $this->checkForUpdates();
+			$this->checkForUpdates();
 		}
 
 	}

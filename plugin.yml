@@ -1,5 +1,5 @@
 name: NetBan
-version: 1.0.3
+version: 1.0.4
 main: InspectorGadget\NetworkBan\MainHandler
 api: 3.0.0
 author: InspectorGadget
