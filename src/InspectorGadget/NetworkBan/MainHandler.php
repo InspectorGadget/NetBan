@@ -16,7 +16,6 @@
 
 namespace InspectorGadget\NetworkBan;
 
-use pocketmine\utils\Internet;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
@@ -32,7 +31,6 @@ class MainHandler extends PluginBase implements Listener {
 
 	public $mysqli;
 	public $kick_msg;
-	public $api = "http://api.rtgnetworks.com/mcpe/netban/";
 
 	public function onEnable(): void {
 
@@ -55,23 +53,9 @@ class MainHandler extends PluginBase implements Listener {
 			$this->mysqli->query("CREATE TABLE IF NOT EXISTS `exempt` (`id` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, `username` TEXT NOT NULL)");
 
 			$this->getLogger()->info("Everything is setup!");
-			$this->checkForUpdates();
 		}
 
 	}
-
-	public function checkForUpdates() {
-        $decode = json_decode(Internet::getURL($this->api));
-        $currentVersion = $this->getDescription()->getVersion();
-
-        if ($currentVersion < $decode->version) {
-            $this->getLogger()->warning("New update for NetBan is available! New Version: {$decode->version}");
-        }
-
-        if ($currentVersion == $decode->version) {
-            $this->getLogger()->info("You are using the latest version of NetBan. Version {$decode->version}");
-        }
-    }
 
 	public function returnBanHandler() {
 		return new BanHandler($this, $this->mysqli);
