@@ -82,11 +82,12 @@ class MainHandler extends PluginBase implements Listener {
 			$username = $this->getConfig()->get("username");
 			$password = $this->getConfig()->get("password");
 			$database = $this->getConfig()->get("database");
+			$port = $this->getConfig()->get("port");
 
 			if (empty($host) || empty($username) || empty($database)) {
 				$this->getLogger()->warning("Please verify your SQL Credentials!");
 			} else {
-				$connection = mysqli_connect($host, $username, $password, $database);
+				$connection = mysqli_connect($host, $username, $password, $database, $port);
 				if (!$connection) {
 					$this->getLogger()->warning("Unable to connect to MySQL");
 					$this->getServer()->getPluginManager()->disablePlugin($this); // Shut down plugin
